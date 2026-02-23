@@ -1,0 +1,20 @@
+2026-02-22 13:41:05,056 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 28%)
+2026-02-22 13:41:37,218 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 36%)
+2026-02-22 13:42:03,514 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 25%)
+2026-02-22 13:44:00,118 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 25%)
+2026-02-22 13:44:21,399 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 19%)
+2026-02-22 13:48:53,578 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 44%)
+2026-02-22 14:21:55,242 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 45%)
+2026-02-22 15:51:04,153 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:29:24,160 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:31:50,005 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:32:30,548 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:33:14,009 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:35:00,481 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 8%)
+2026-02-22 17:42:20,892 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 97%)
+2026-02-22 17:49:06,776 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:51:10,025 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:51:26,038 [ERROR] phishing_detector.routes.detect: Error during detection: X has 298 features, but RandomForestClassifier is expecting 295 features as input.
+2026-02-22 17:53:23,985 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
+2026-02-22 18:03:14,851 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
+2026-02-23 10:15:58,056 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
