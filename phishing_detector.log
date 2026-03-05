@@ -18,3 +18,11 @@
 2026-02-22 17:53:23,985 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
 2026-02-22 18:03:14,851 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
 2026-02-23 10:15:58,056 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 89%)
+2026-02-24 13:57:35,842 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 91%)
+2026-02-24 13:59:09,551 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 32%)
+2026-03-05 11:10:31,576 [INFO] phishing_detector.routes.detect: Detection performed: legitimate (Risk: 40%)
+2026-03-05 11:11:15,724 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 96%)
+2026-03-05 22:00:51,672 [INFO] phishing_detector.main: Database initialized
+2026-03-05 22:01:22,953 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 66%)
+2026-03-05 22:02:17,231 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 96%)
+2026-03-05 22:04:15,693 [INFO] phishing_detector.routes.detect: Detection performed: phishing (Risk: 93%)

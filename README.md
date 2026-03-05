@@ -1,219 +1,123 @@
-# 🛡️ AI-Powered Phishing Shield 🤖📧
+# PhishScope IDS
 
-**AI-Powered Phishing Shield** is an advanced cybersecurity application that uses Machine Learning to detect phishing emails in real-time.
-It analyzes email content, extracts threat indicators, assigns risk scores, and provides a modern UI dashboard for threat visualization and monitoring.
+AI-powered phishing email detection with a FastAPI backend, SQLite logging, and a React + Vite frontend.
 
-This system is built for **cybersecurity automation, AI security research, and real-world phishing defense systems**.
+## Features
 
----
+- ML phishing detection (`phishing`/`legitimate`) with confidence and risk score
+- Explainable signals (`url_count`, `keyword_count`, urgency/credential indicators)
+- Email summarization endpoint
+- Batch scanning endpoint (up to 25 messages/request)
+- Detection history with CSV export support on the frontend
+- Live dashboard stats (total scans, phishing count, average risk)
 
-## 🚀 Features
+## Tech Stack
 
-* **AI-Based Phishing Detection** using Random Forest + TF-IDF
-* **Real-Time Threat Analysis**
-* **Risk Scoring System (0–100%)**
-* **Modern Dashboard UI (Glassmorphism Design)**
-* **Email Content Analyzer**
-* **Recent Scan History Tracking**
-* **SQLite Database Logging**
-* **FastAPI Backend**
-* **REST API Support**
-* **Production-Ready Architecture**
+- Backend: FastAPI, SQLAlchemy, scikit-learn, joblib
+- Frontend: React (Vite), React Bits, CSS
+- Database: SQLite
 
----
+## Installation
 
-## 🧠 Tech Stack
-
-### 🔹 Backend
-
-* **FastAPI**
-* **Scikit-learn**
-* **Pandas**
-* **SQLAlchemy**
-* **Uvicorn**
-
-### 🔹 Machine Learning
-
-* **Random Forest Classifier**
-* **TF-IDF Vectorization**
-* **Feature Engineering on Email Text**
-
-### 🔹 Frontend
-
-* **HTML5**
-* **CSS3 (Glassmorphism UI)**
-* **JavaScript (ES6+)**
-
-### 🔹 Database
-
-* **SQLite**
-
----
-
-## 📦 Installation
-
-### 1️⃣ Clone Repository
+### 1. Clone
 
 ```bash
 git clone https://github.com/your-username/ai-phishing-shield.git
 cd ai-phishing-shield
 ```
 
-### 2️⃣ Create Virtual Environment
+### 2. Python environment
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
-```
+# Windows
+venv\Scripts\activate
+# Linux/macOS
+source venv/bin/activate
 
-### 3️⃣ Install Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
----
-
-## ⚙️ Usage
-
-### 🧠 Train the AI Model
+### 3. Frontend dependencies
 
 ```bash
-python backend/ml/train.py
+cd frontend
+npm install --legacy-peer-deps
 ```
 
-This will generate:
+## Run the Project
 
-* `models/phishing_model.pkl`
-* `models/tfidf_vectorizer.pkl`
-
----
-
-### 🚀 Run Backend API
+### Backend
 
 ```bash
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-API Docs:
+- API health: `http://127.0.0.1:8000/`
+- API docs: `http://127.0.0.1:8000/docs`
 
-```
-http://localhost:8000/docs
-```
-
----
-
-### 🌐 Run Frontend
-
-Open in browser:
-
-```text
-frontend/index.html
-```
-
----
-
-## 📡 API Example
+### Frontend
 
 ```bash
-curl -X POST "http://localhost:8000/api/detect" \
+cd frontend
+npm run dev
+```
+
+- App URL (default): `http://127.0.0.1:5173`
+
+### Frontend env (optional)
+
+Create `frontend/.env` if needed:
+
+```env
+VITE_API_URL=http://127.0.0.1:8000/api
+```
+
+## API Endpoints
+
+- `POST /api/detect`
+- `POST /api/detect/batch`
+- `POST /api/summarize`
+- `GET /api/logs?limit=120`
+- `GET /api/stats`
+
+### Example request
+
+```bash
+curl -X POST "http://127.0.0.1:8000/api/detect" \
 -H "Content-Type: application/json" \
--d '{"email_text":"Congratulations! You have won $850,000. Click here to claim now!"}'
+-d '{"email_text":"Urgent: verify your account now and click http://fake-login.example"}'
 ```
 
-### Response:
+## Screenshots
 
-```json
-{
-  "prediction": "phishing",
-  "confidence": 0.97,
-  "risk_score": 97
-}
-```
+### Dashboard
 
----
+![PhishScope Dashboard](./screenshots/dashboard.png)
 
-## 🗂️ Project Structure
+### Gmail Phishing Example
+
+![Gmail Phishing Example](./screenshots/gmail-phishing.png)
+
+### UI Overview
+
+![UI Overview](./screenshots/ui.png)
+
+## Project Structure
 
 ```text
-ai-phishing-shield/
-│
+Intrution-Detection-System/
 ├── backend/
-│   ├── main.py
-│   ├── ml/
-│   │   └── train.py
-│   ├── models/
-│   └── database/
-│
 ├── frontend/
+│   ├── src/
 │   ├── index.html
-│   ├── styles.css
-│   └── script.js
-│
+│   ├── package.json
+│   └── vite.config.js
 ├── data/
 ├── models/
-├── requirements.txt
 └── README.md
 ```
 
----
+## License
 
-## 📊 Screenshots
-
-### 🏠 AI Phishing Shield Dashboard
-
-![Dashboard](./screenshots/dashboard.png)
-
-### 📩 Gmail Phishing Email Example
-
-![Phishing Email](./screenshots/gmail-phishing.png)
-
-### 🛡️ AI Phishing Shield UI
-
-![UI](./screenshots/ui.png)
-
----
-
-## 🔐 Security Capabilities
-
-* Phishing keyword extraction
-* URL risk analysis
-* Urgency detection
-* Reward-based scam detection
-* Identity spoofing patterns
-* Social engineering detection
-* Fake domain detection
-* Confidence-based classification
-
----
-
-## 🎯 Use Cases
-
-* Cybersecurity research
-* SOC automation
-* Email security platforms
-* AI security tools
-* Academic projects
-* Pentesting labs
-* Security startups
-* Blue team tooling
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-Fork the repo, create a branch, and submit a PR 🚀
-
----
-
-## 📜 License
-
-MIT License – Free to use, modify, and distribute.
-
----
-
-## 💬 Author
-
-Built with ❤️ for cybersecurity, AI, and automation.
+MIT
