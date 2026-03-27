@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { api } from '../services/api';
 
 function csvSafe(value) {
   return `"${String(value ?? '').replaceAll('"', '""')}"`;
 }
 
 export default function HistoryPanel({ logs, onRefresh, addToast }) {
-  function exportCsv() {
-    if (!logs.length) {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  function exportCsvFromData(dataToExport) {
+    if (!dataToExport.length) {
       addToast('No logs to export.', 'error');
       return;
     }
@@ -34,6 +39,37 @@ export default function HistoryPanel({ logs, onRefresh, addToast }) {
     addToast('Logs exported as CSV.', 'success');
   }
 
+  function exportCsv() {
+    exportCsvFromData(logs);
+  }
+
+  async function generateFilteredReport() {
+    setIsGenerating(true);
+    try {
+      let finalStart = startDate;
+      let finalEnd = endDate;
+
+      // Auto-swap if the user accidentally puts the newer date in the Start Date box
+      if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+        finalStart = endDate;
+        finalEnd = startDate;
+        setStartDate(finalStart);
+        setEndDate(finalEnd);
+      }
+
+      const data = await api.getLogs(1000, finalStart, finalEnd);
+      if (!data.length) {
+        addToast('No logs found for this date range.', 'error');
+      } else {
+        exportCsvFromData(data);
+      }
+    } catch (err) {
+      addToast('Failed to fetch filtered report.', 'error');
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return (
     <section className="tab-content">
       <div className="panel">
@@ -42,13 +78,37 @@ export default function HistoryPanel({ logs, onRefresh, addToast }) {
             <h2>Scan History</h2>
             <p>Recent detections with timestamp and risk score.</p>
           </div>
-          <div className="history-actions">
-            <button type="button" className="btn-secondary mini-btn" onClick={onRefresh}>
-              Refresh
-            </button>
-            <button type="button" className="btn-secondary mini-btn" onClick={exportCsv}>
-              Export CSV
-            </button>
+          <div className="history-actions" style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-end' }}>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <input 
+                type="date" 
+                value={startDate} 
+                onChange={(e) => setStartDate(e.target.value)} 
+                title="Start Date" 
+                className="btn-secondary mini-btn"
+                style={{ cursor: 'pointer', fontFamily: 'inherit' }}
+              />
+              <span style={{ color: '#aaa' }}>to</span>
+              <input 
+                type="date" 
+                value={endDate} 
+                onChange={(e) => setEndDate(e.target.value)} 
+                title="End Date" 
+                className="btn-secondary mini-btn"
+                style={{ cursor: 'pointer', fontFamily: 'inherit' }} 
+              />
+              <button type="button" className="btn-primary mini-btn" onClick={generateFilteredReport} disabled={isGenerating}>
+                {isGenerating ? 'Generating...' : 'Generate Report'}
+              </button>
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button type="button" className="btn-secondary mini-btn" onClick={onRefresh}>
+                Refresh Current
+              </button>
+              <button type="button" className="btn-secondary mini-btn" onClick={exportCsv}>
+                Export Current
+              </button>
+            </div>
           </div>
         </div>
 

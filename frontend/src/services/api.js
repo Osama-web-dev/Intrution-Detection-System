@@ -43,8 +43,11 @@ export const api = {
       body: JSON.stringify({ email_text: emailText }),
     });
   },
-  getLogs(limit = 120) {
-    return request(`/logs?limit=${limit}`);
+  getLogs(limit = 120, startDate = '', endDate = '') {
+    let url = `/logs?limit=${limit}`;
+    if (startDate) url += `&start_date=${startDate}`;
+    if (endDate) url += `&end_date=${endDate}`;
+    return request(url);
   },
   getStats() {
     return request('/stats');

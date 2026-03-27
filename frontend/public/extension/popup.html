@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 320px; font-family: sans-serif; padding: 15px; background: #0b131a; color: #fff; }
+    h3 { margin-top: 0; color: #0fdcbe; }
+    button { background: #0fdcbe; color: #000; border: none; padding: 8px 12px; cursor: pointer; font-weight: bold; border-radius: 4px; width: 100%; margin-bottom: 10px; }
+    button:hover { background: #0ca992; }
+    .result { margin-top: 15px; padding: 10px; border-radius: 6px; background: #1a2530; display: none; }
+    .danger { color: #ff5d73; }
+    .safe { color: #46d88f; }
+  </style>
+</head>
+<body>
+  <h3>PhishScope Analyzer</h3>
+  <p style="font-size:13px; color:#aaa;">Scan current email for phishing indicators.</p>
+  <button id="scanBtn">Scan Active Email</button>
+  <button id="reportBtn" style="background:#2a3a4c; color:#fff;">Generate History Report</button>
+  
+  <div id="resultBox" class="result">
+    Verification: <strong id="verdict"></strong>
+    <p style="font-size:14px; margin-bottom:0;">Risk Score: <span id="riskScore"></span>%</p>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

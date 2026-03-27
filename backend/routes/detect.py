@@ -137,8 +137,29 @@ def detect_batch(request: BatchDetectRequest, db: Session = Depends(get_db)):
 
 
 @router.get("/logs", response_model=List[LogResponse])
-def get_logs(limit: int = Query(default=50, ge=1, le=300), db: Session = Depends(get_db)):
-    logs = db.query(DetectionLog).order_by(DetectionLog.timestamp.desc()).limit(limit).all()
+def get_logs(
+    limit: int = Query(default=50, ge=1, le=5000), 
+    start_date: str = Query(default=None),
+    end_date: str = Query(default=None),
+    db: Session = Depends(get_db)
+):
+    query = db.query(DetectionLog)
+
+    if start_date:
+        try:
+            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+            query = query.filter(DetectionLog.timestamp >= start_dt)
+        except ValueError:
+            pass
+
+    if end_date:
+        try:
+            end_dt = datetime.strptime(end_date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+            query = query.filter(DetectionLog.timestamp <= end_dt)
+        except ValueError:
+            pass
+
+    logs = query.order_by(DetectionLog.timestamp.desc()).limit(limit).all()
     return [
         {
             "id": log.id,

@@ -9,6 +9,7 @@ import SummarizerPanel from './components/SummarizerPanel';
 import BatchPanel from './components/BatchPanel';
 import HistoryPanel from './components/HistoryPanel';
 import Toast from './components/Toast';
+import LoadingScreen from './components/LoadingScreen';
 
 const initialStats = {
   total_scans: 0,
@@ -23,6 +24,7 @@ export default function App() {
   const [stats, setStats] = useState(initialStats);
   const [logs, setLogs] = useState([]);
   const [toast, setToast] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const toastTimer = useRef(null);
 
   const addToast = useCallback((message, type = 'info') => {
@@ -104,7 +106,9 @@ export default function App() {
       <div className="bg-glow bg-glow-1" />
       <div className="bg-glow bg-glow-2" />
 
-      <div className="container">
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+
+      <div className="container" style={{ opacity: isLoading ? 0 : 1, pointerEvents: isLoading ? 'none' : 'auto', transition: 'opacity 0.6s ease-in-out' }}>
         <FadeContent duration={650} blur>
           <Hero />
         </FadeContent>

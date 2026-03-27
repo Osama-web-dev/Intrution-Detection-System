@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "PhishScope IDS Extension",
+  "version": "1.0",
+  "description": "Filter spam emails and generate threat reports directly from your webmail.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["http://localhost:8000/*", "*://*/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://mail.google.com/*", "*://outlook.live.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
